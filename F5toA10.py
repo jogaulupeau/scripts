@@ -7,13 +7,9 @@
 #
 ##############################################################################
 #
-# Ce script réalise différentes opérations de monitoring et met en évidence 
-# certains points importants comme une partition disque bientôt pleine ou une
-# charge processeur trop élevée.
-#
-# Ce script a été réalisé durant une scéance de travaux pratiques et a des fins
-# didactiques. Il est issu du travail collectif des personnes citées ci-dessous
-# en auteurs et a nécessité uniquement deux heures de développement.
+# Ce script permet de transposer rapidement une conf F5 Big-IP en conf A10.
+# Tous les paramètres ne sont pas pris en charge mais le script permet d'avoir
+# une configuration de base solide.
 # 
 ##############################################################################
 # 
@@ -135,6 +131,7 @@ class Vip():
                         a10.write('\tport %s tcp\n' %self.port)
                 if len(self.pool)>0:
                         a10.write('\t\tservice-group %s\n' %self.pool)
+                a10.write('\t\tuse-rcv-hop-for-resp\n')
                 if len(self.persist)>0:
                         if 'source_addr' in self.persist:
                                 a10.write('\t\ttemplate persist source-ip %s\n' %self.persist)
