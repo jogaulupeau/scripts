@@ -207,6 +207,8 @@ for s = 1, screen.count() do
     right_layout:add(wifi)
     right_layout:add(memicon)
     right_layout:add(mem)
+    right_layout:add(pacicon)
+    right_layout:add(pacwidget)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
