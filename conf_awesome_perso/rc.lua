@@ -7,9 +7,11 @@ require("awful.autofocus")
 local wibox = require("wibox")
 -- Theme handling library
 local beautiful = require("beautiful")
+beautiful.init("/home/gaulujon/.config/awesome/themes/default/theme.lua")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+local wi = require("wi")
 
 -- {{{ Error handling
 -- Check if awesome encountered an error during startup and fell back to
@@ -80,11 +82,19 @@ end
 
 -- {{{ Tags
 -- Define a tag table which hold all screen tags.
-tags = {}
+tags = {
+  names = {
+	   '⚡ Work',
+	   '♨ Private',
+	},
+  layout = {
+	   layouts[4],    -- 1:Work
+	   layouts[4],    -- 2:Private
+	}
+      }
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
-    --tags[s] = awful.tag({ 1, 2, 3, 4, 5, 6, 7, 8, 9 }, s, layouts[1])
-    tags[s] = awful.tag({ 1, 2 }, s, layouts[1])
+    tags[s] = awful.tag(tags.names, s, tags.layout)
 end
 -- }}}
 
@@ -191,6 +201,12 @@ for s = 1, screen.count() do
     local right_layout = wibox.layout.fixed.horizontal()
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
+    right_layout:add(volicon)
+    right_layout:add(volpct)
+    right_layout:add(wifiicon)
+    right_layout:add(wifi)
+    right_layout:add(memicon)
+    right_layout:add(mem)
     right_layout:add(mylayoutbox[s])
 
     -- Now bring it all together (with the tasklist in the middle)
@@ -379,7 +395,7 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "gimp" },
       properties = { floating = true } },
-    { rule = { class = "guake" },
+    { rule = { class = "Guake" },
       properties = { floating = true } },
     -- Spotify sur le bureau 2 de l'écran 1
     { rule = { class = "Spotify" },
