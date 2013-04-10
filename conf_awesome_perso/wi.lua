@@ -92,17 +92,18 @@ vicious.register(pacwidget, vicious.widgets.pkg, function(widget, args)
 --
 -- Buttons
   function popup_pac()
-  local pac_updates = ""
-  local f = io.popen("pacman -Sup --dbpath /tmp/pacsync")
-  if f then
-  pac_updates = f:read("*a"):match(".*/(.*)-.*\n$")
+    local pac_updates = ""
+    local lines = "<u>Pacman Updates:</u>\n"
+    local f = io.popen("pacman -Qqu", "r")
+    local s = f:read('*all')
+    pac_updates = lines .. "\n" .. s
+    f:close()
+    if not pac_updates then
+      pac_updates = "System is up to date"
+    end
+    naughty.notify { text = pac_updates }
   end
-  f:close()
-  if not pac_updates then
-  pac_updates = "System is up to date"
-  end
-  naughty.notify { text = pac_updates }
-  end
+
   pacwidget:buttons(awful.util.table.join(awful.button({ }, 1, popup_pac)))
   pacicon:buttons(pacwidget:buttons())
 -- End Pacman }}}

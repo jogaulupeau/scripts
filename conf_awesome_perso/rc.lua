@@ -11,6 +11,8 @@ beautiful.init("/home/gaulujon/.config/awesome/themes/default/theme.lua")
 -- Notification library
 local naughty = require("naughty")
 local menubar = require("menubar")
+--Vicious + Widgets
+vicious = require("vicious")
 local wi = require("wi")
 
 -- {{{ Error handling
