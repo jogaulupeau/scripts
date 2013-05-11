@@ -1,4 +1,51 @@
 #!/usr/bin/python2.7
+# -*- coding: utf-8 -*-
+# 
+##############################################################################
+#
+# export_sproxy.py
+#
+##############################################################################
+#
+# Ce script permet de recuperer quelques informations importantes a partir 
+# d'un export XML de la configuration de sProxy ou rWeb 4.1
+# 
+##############################################################################
+# 
+# Auteur        : Jonathan GAULUPEAU
+# Version       : 0.1
+# Date          : 11/05/2013
+#
+##############################################################################
+#
+# Ce script est diffuséous la licence EUPL v1.1
+#
+# This script is released under EUPL v1.1
+#
+# http://ec.europa.eu/idabc/eupl
+#
+##############################################################################
+#
+# Ce programme est un logiciel libre ; vous pouvez le re-distribuer et/ou le
+# modifier au titre des clauses de la European Union Public Licence (EUPL) 
+# version 1.1, telle que publiée par l'Union Européenne.
+#
+# Ce programme est distribué dans l'espoir qu'il sera utile, 
+# mais SANS AUCUNE GARANTIE ; sans même une garantie implicite de 
+# COMMERCIABILITÉ ou DE CONFORMITÉ À UNE UTILISATION PARTICULIÈRE. 
+# Voir la EUPL version 1.1 pour plus de détails.
+#
+# This program is free software; you can redistribute it and/or modify it
+# under the terms of the European Union Public Licence (EUPL) version 1.1 
+# as published by the European Union.
+#
+# This program is distributed in the hope that it will be useful, but 
+# WITHOUT ANY WARRANTY; without even the implied warranty of 
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+# See the EUPL version 1.1 for more details.
+#
+##############################################################################
+
 from BeautifulSoup import BeautifulStoneSoup
 from subprocess import call
 import argparse
