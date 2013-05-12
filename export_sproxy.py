@@ -421,16 +421,23 @@ if __name__ == '__main__':
         service = ''
         app['id'] =  a['application_id'].text.replace('\'', '')
         app['name'] = a['name'].text.replace('\'', '')
+        app['policy_id'] = a['running_policy_id'].text.replace('\'', '')
         policy = conf.getPolicy(a['running_policy_id'].text)
         if policy:
             vhost = conf.getVhost(policy['vhost_id'].text)
+            app['vhost_id'] = policy['vhost_id'].text.replace('\'', '')
         if vhost:
             instance = conf.getInstance(vhost['instance_id'].text)
             certificate = conf.getCertificate(vhost['cert_id'].text)
             app['servername'] = vhost['host'].text.replace('\'', '')
+            app['instance_id'] = vhost['instance_id'].text.replace('\'', '')
         if instance:
             service = conf.getService(instance['service_id'].text)
+            app['service_id'] = instance['service_id'].text.replace('\'', '')
         if certificate:
+            app['cert_id'] = certificate['CERT_file'].text.replace('\'', '')
+            app['chain_id'] = certificate['CHAIN_file'].text.replace('\'', '')
+            app['private_key_id'] = certificate['private_key_file'].text.replace('\'', '')
             app['private_key'] = conf.getFile(certificate['private_key_file'].text.replace('\'', ''))
             app['chain'] = conf.getFile(certificate['CHAIN_file'].text.replace('\'', ''))
             app['cert'] = conf.getFile(certificate['CERT_file'].text.replace('\'', ''))
@@ -440,12 +447,23 @@ if __name__ == '__main__':
             app['ip'] = service['address'].text.replace('\'', '')
             app['port'] = service['port'].text.replace('\'', '')
         print '#'*80
-        print 'Name        :', app['name']
-        print 'ServerName  :', app['servername']
-        print 'ProxyPass   :', app['proxypass']
-        print 'Listen on   :', app['ip'] + ':' + app['port']
-        print 'Certificat  :\n', app['cert']
-        print 'Private Key :\n', app['private_key']
-        print 'Chain       :\n', app['chain']
+        print 'Name           :', app['name']
+        print 'ServerName     :', app['servername']
+        print 'ProxyPass      :', app['proxypass']
+        print 'Listen on      :', app['ip'] + ':' + app['port']
+        print 'Certificat     :\n', app['cert']
+        print 'Private Key    :\n', app['private_key']
+        print 'Chain          :\n', app['chain']
+        print 'Policy ID      :', app['policy_id']
+        if vhost:
+            print 'VHost ID       :', app['vhost_id']
+        if instance:
+            print 'Instance ID    :', app['instance_id']
+        if service:
+            print 'Service ID     :', app['service_id']
+        if certificate:
+            print 'Certificat ID  :', app['cert_id']
+            print 'Private Key ID :', app['private_key_id']
+            print 'Chain ID       :', app['chain_id']
         print '#'*80
 
